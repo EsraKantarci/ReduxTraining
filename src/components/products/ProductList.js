@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-export default class productList extends Component {
+export default class ProductList extends Component {
   render() {
     return (
-      <div>productList</div>
+      <div><h3>ProductList</h3></div>
     )
   }
 }

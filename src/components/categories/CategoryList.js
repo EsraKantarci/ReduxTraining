@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-export default class categoryList extends Component {
+export default class CategoryList extends Component {
   render() {
     return (
-      <div>categoryList</div>
+      <div><h2>CategoryList</h2></div>
     )
   }
 }
