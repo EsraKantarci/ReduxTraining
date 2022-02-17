@@ -6,6 +6,6 @@ export default function changeCategoryReducer(state = initialState.currentCatego
         case actionTypes.CHANGE_CATEGORY:
             return action.payload //payload'da category tuttuk, onu döndürecek. yoksa initial state current category.
         default:
-            break;
+            return state; //bunu yazmazsan initialization error geliyor, bilinen bir redux problemi.
     }
 }
