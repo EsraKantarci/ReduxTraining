@@ -8,8 +8,7 @@ import initialState from "./initialState";
 //index.js'ye yeni reducer'ını eklemeyi unutma
 
 
-export default function changeCategoryReducer(state = null, action){  //bootcampte burası initialState.categories ama initialize sıkıntısı oldu, 
-    // initial'de categories [] olmasına rağmen görmüyor burası.
+export default function changeCategoryReducer(state = initialState.categories, action){  
     switch (action.type) {
         case actionTypes.GET_CATEGORIES_SUCCESS:
             return action.payload //payload'da category tuttuk, onu döndürecek. yoksa initial state current category.

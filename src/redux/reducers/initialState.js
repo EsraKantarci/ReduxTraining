@@ -1,6 +1,6 @@
 export default {
   currentCategory: {
-    categoryName: "Beverages",
+    categoryName: "Beverages"},
     categories: [], //array
-  },
+  
 };

@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as categoryActions from "../../redux/actions/categoryActions"
 
+
 class CategoryList extends Component {
+
+
+
   render() { //redux thunk kurmayı unutma middleware için. configureStore'da importla
     return (
       <div>
@@ -20,7 +24,8 @@ function mapStateToProps(state) {
   //direkt pat pat alıyorsun.
 
   return {
-    currentCategory: state.changeCategoryReducer
+    currentCategory: state.changeCategoryReducer,
+    categories: state.categoryListReducer
   };
 }
 
