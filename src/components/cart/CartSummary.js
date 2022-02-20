@@ -7,35 +7,55 @@ import {
   DropdownToggle,
   NavItem,
   NavLink,
+  Badge,
 } from "reactstrap";
+import { bindActionCreators } from "redux";
+import * as cartActions from "../../redux/actions/cartActions";
 
 class CartSummary extends Component {
   renderEmpty() {
     //sepet boşken
-    return (<NavItem>
-      <NavLink>Sepetiniz boşken</NavLink>
-    </NavItem>);
+    return (
+      <NavItem>
+        <NavLink>Sepetiniz boş</NavLink>
+      </NavItem>
+    );
   }
 
   renderSummary() {
-      return(
-    <UncontrolledDropdown nav inNavbar>
-      <DropdownToggle nav caret>
-        Cart ({this.props.cart.length})
-      </DropdownToggle>
-      <DropdownMenu end>
-        <DropdownItem>Option 1</DropdownItem>
-        <DropdownItem>Option 2</DropdownItem>
-        <DropdownItem divider />
-        <DropdownItem>Reset</DropdownItem>
-      </DropdownMenu>
-    </UncontrolledDropdown>);
+    return (
+      <UncontrolledDropdown nav inNavbar>
+        <DropdownToggle nav caret>
+          Sepetiniz ({this.props.cart.length})
+        </DropdownToggle>
+        <DropdownMenu end>
+          {this.props.cart.map((cartItem) => (
+            <DropdownItem key={cartItem.product.id}>
+              {cartItem.product.productName}
+              <Badge color="primary"> {cartItem.quantity}</Badge>
+              <Badge
+                color="danger"
+                onClick={() => {
+                  this.props.actions.removeFromCart(cartItem.product);
+                }}
+              >
+                Kaldır
+              </Badge>
+            </DropdownItem>
+          ))}
+          <DropdownItem divider />
+          <DropdownItem>Sepete git</DropdownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    );
   }
 
   render() {
-    return <div>
+    return (
+      <div>
         {this.props.cart.length > 0 ? this.renderSummary() : this.renderEmpty()}
-    </div>;
+      </div>
+    );
   }
 }
 
@@ -45,4 +65,12 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CartSummary);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      removeFromCart: bindActionCreators(cartActions.removeFromCart, dispatch),
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartSummary);

@@ -36,16 +36,14 @@ export default class Navi extends React.Component {
         light
       >
         <NavbarBrand href="/">
-          reactstrap
+          Northwind
         </NavbarBrand>
-        <NavbarToggler onClick={function noRefCheck(){}} />
         <Collapse navbar>
           <Nav
             className="me-auto"
             navbar
           >
-    
-           
+  
           </Nav>
          <CartSummary/>
         </Collapse>
