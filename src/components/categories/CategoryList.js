@@ -4,30 +4,36 @@ import { ListGroup, ListGroupItem } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as categoryActions from "../../redux/actions/categoryActions";
 import * as productActions from "../../redux/actions/productActions";
-import {Badge} from "reactstrap"
+import { Badge } from "reactstrap";
 
 class CategoryList extends Component {
   componentDidMount() {
     this.props.actions.getCategories(); //uygulama açıldığında state değişecek, kategorileri çekecek
   }
 
-  selectCategory = (category) => { //bir event ise -> () => {} olmalı
+  selectCategory = (category) => {
+    //bir event ise -> () => {} olmalı
     this.props.actions.changeCategory(category);
     this.props.actions.getProducts(category.id); //her kategori seçildiğinde productleri tekrar seçecek
-  }
+  };
 
   render() {
     //redux thunk kurmayı unutma middleware için. configureStore'da importla
     return (
       <div>
-        <h2> <Badge color="primary"> Category List ({this.props.categories.length}) </Badge> </h2>
+        <h2>
+          <Badge color="primary">
+            Category List ({this.props.categories.length})
+          </Badge>
+        </h2>
         <ListGroup>
           {this.props.categories.map((category) => (
-            <ListGroupItem 
-            active={category.id === this.props.currentCategory.id} //mavileştir
-            onClick = {() => this.selectCategory(category)} //seçileni göster
-            key={category.id}>
-              {category.categoryName} 
+            <ListGroupItem
+              key={category.id}
+              active={category.id === this.props.currentCategory.id} //mavileştir
+              onClick={() => this.selectCategory(category)} //seçileni göster
+            >
+              {category.categoryName}
             </ListGroupItem>
           ))}
         </ListGroup>

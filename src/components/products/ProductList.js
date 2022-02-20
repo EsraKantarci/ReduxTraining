@@ -25,7 +25,7 @@ class ProductList extends Component {
               <th>Product Name</th>
               <th>Unit Price</th>
               <th>Quantity Per Unit</th>
-              <th>Unit Per Stock</th>
+              <th>Units In Stock</th>
             </tr>
           </thead>
           <tbody>
@@ -35,7 +35,7 @@ class ProductList extends Component {
                 <td>{product.productName}</td>
                 <td>{product.unitPrice}</td>
                 <td>{product.quantityPerUnit}</td>
-                <td>{product.unitPerStock}</td>
+                <td>{product.unitsInStock}</td>
               </tr>
             ))}
           </tbody>
