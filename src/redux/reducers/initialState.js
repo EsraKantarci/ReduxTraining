@@ -3,6 +3,7 @@ export default {
     categoryName: "Beverages"},
     categories: ["A", "B"], //arra
     products: [],
-    cart: []
+    cart: [],
+    savedProduct: {}
 };
 
