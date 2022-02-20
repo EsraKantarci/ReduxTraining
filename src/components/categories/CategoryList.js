@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { bindActionCreators } from "redux";
 import * as categoryActions from "../../redux/actions/categoryActions";
+import * as productActions from "../../redux/actions/productActions";
+import {Badge} from "reactstrap"
 
 class CategoryList extends Component {
   componentDidMount() {
@@ -11,20 +13,20 @@ class CategoryList extends Component {
 
   selectCategory = (category) => { //bir event ise -> () => {} olmalı
     this.props.actions.changeCategory(category);
+    this.props.actions.getProducts(category.id); //her kategori seçildiğinde productleri tekrar seçecek
   }
 
   render() {
     //redux thunk kurmayı unutma middleware için. configureStore'da importla
     return (
       <div>
-        <h2>CategoryList: {this.props.categories.length} </h2>
+        <h2> <Badge color="primary"> Category List ({this.props.categories.length}) </Badge> </h2>
         <ListGroup>
           {this.props.categories.map((category) => (
             <ListGroupItem 
             active={category.id === this.props.currentCategory.id} //mavileştir
             onClick = {() => this.selectCategory(category)} //seçileni göster
             key={category.id}>
-
               {category.categoryName} 
             </ListGroupItem>
           ))}
@@ -53,6 +55,7 @@ function mapDispatchToProps(dispatch) {
         categoryActions.changeCategory,
         dispatch
       ),
+      getProducts: bindActionCreators(productActions.getProducts, dispatch),
     },
   };
 }
