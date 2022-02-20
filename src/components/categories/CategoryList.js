@@ -9,6 +9,10 @@ class CategoryList extends Component {
     this.props.actions.getCategories(); //uygulama açıldığında state değişecek, kategorileri çekecek
   }
 
+  selectCategory = (category) => { //bir event ise -> () => {} olmalı
+    this.props.actions.changeCategory(category);
+  }
+
   render() {
     //redux thunk kurmayı unutma middleware için. configureStore'da importla
     return (
@@ -16,9 +20,12 @@ class CategoryList extends Component {
         <h2>CategoryList: {this.props.categories.length} </h2>
         <ListGroup>
           {this.props.categories.map((category) => (
-            <ListGroupItem key={category.id}>
-              
-              {category.categoryName}
+            <ListGroupItem 
+            active={category.id === this.props.currentCategory.id} //mavileştir
+            onClick = {() => this.selectCategory(category)} //seçileni göster
+            key={category.id}>
+
+              {category.categoryName} 
             </ListGroupItem>
           ))}
         </ListGroup>
