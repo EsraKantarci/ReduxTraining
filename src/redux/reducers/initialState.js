@@ -4,3 +4,4 @@ export default {
     categories: ["A", "B"], //array
   
 };
+
