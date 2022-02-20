@@ -4,6 +4,12 @@ import { bindActionCreators } from "redux";
 import * as categoryActions from "../../redux/actions/categoryActions";
 
 class CategoryList extends Component {
+  
+  componentDidMount() {
+    this.props.actions.getCategories();
+  }
+
+
   render() {
     //redux thunk kurmayı unutma middleware için. configureStore'da importla
     return (
@@ -15,25 +21,30 @@ class CategoryList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  //prop yapısı read-only, react'ta component drilling gerekiyordu.
-  //buradaysa merkezi noktada tutup (redux store'da) state bilgisine tekli hiyerarşik taşımaya gerek yok
-  //direkt pat pat alıyorsun.
 
+function mapStateToProps(state) {
   return {
     currentCategory: state.changeCategoryReducer,
-    categories: state.categoryListReducer,
+    categories: state.categoryListReducer
   };
 }
 
-function mapDispatchToProps() {
-  //aksiyonu proplara bağla
+function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      //bi aksiyonum olacak, buraya bağlayacağız
-      getCategories: bindActionCreators(categoryActions.getCategories),
-    },
+      getCategories: bindActionCreators(
+        categoryActions.getCategories,
+        dispatch
+      ),
+      changeCategory: bindActionCreators(
+        categoryActions.changeCategory,
+        dispatch
+      )
+    }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoryList);
